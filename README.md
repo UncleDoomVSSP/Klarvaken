@@ -7,10 +7,16 @@ Klarvaken is a small macOS menu bar app that stops your Mac from going to sleep.
 - One click on the icon keeps the Mac awake until you click it again.
 - A right click opens a menu where you can keep the Mac awake for 30 minutes, 1 hour, 2 hours, 3 hours, 4 hours or indefinitely.
 
+## Download
+
+**[Download Klarvaken.app.zip](https://github.com/UncleDoomVSSP/Klarvaken/releases/latest/download/Klarvaken.app.zip)** (latest release, macOS 11 or later, Apple silicon and Intel)
+
+Unzip it, drag **Klarvaken** into **Applications**, then follow [Opening the app for the first time](#opening-the-app-for-the-first-time). Full steps are in [Install option A](#install-option-a-download-the-built-app).
+
 ## Contents
 
 1. [Requirements](#requirements)
-2. [Install option A: download the built app from GitHub](#install-option-a-download-the-built-app-from-github)
+2. [Install option A: download the built app](#install-option-a-download-the-built-app)
 3. [Install option B: build the app yourself on your Mac](#install-option-b-build-the-app-yourself-on-your-mac)
 4. [Opening the app for the first time](#opening-the-app-for-the-first-time)
 5. [Using Klarvaken](#using-klarvaken)
@@ -21,6 +27,8 @@ Klarvaken is a small macOS menu bar app that stops your Mac from going to sleep.
 10. [Troubleshooting](#troubleshooting)
 11. [How it works](#how-it-works)
 12. [Project layout](#project-layout)
+13. [Releasing a new version](#releasing-a-new-version)
+14. [Licence](#licence)
 
 ## Requirements
 
@@ -28,23 +36,27 @@ Klarvaken is a small macOS menu bar app that stops your Mac from going to sleep.
 - Any Mac, Apple silicon (M1 and later) or Intel. The app is built as a universal binary that runs natively on both.
 - For install option B only: Xcode or the Xcode Command Line Tools.
 
-## Install option A: download the built app from GitHub
+## Install option A: download the built app
 
-Every push to this repository builds the app automatically with GitHub Actions. You can download the result without installing any developer tools.
+No developer tools or GitHub account are needed.
 
-1. Sign in to GitHub. Downloads from GitHub Actions are only available to signed-in users.
-2. Open this repository on GitHub and click the **Actions** tab at the top of the page.
-3. In the left-hand list, click the **Build** workflow.
-4. Click the most recent run with a green tick. If you want a particular branch, check the branch name shown under the run title.
-5. Scroll down to the **Artifacts** section at the bottom of the run page.
-6. Click **Klarvaken.app** to download it. Your browser saves a file called `Klarvaken.app.zip` to your **Downloads** folder.
-7. Open **Finder** and go to **Downloads**.
-8. Double-click `Klarvaken.app.zip` to unzip it. GitHub wraps the build in its own zip, so you may get a second file called `Klarvaken.app.zip` inside a folder. If so, double-click that one as well. Keep going until you see **Klarvaken** with an app icon (`Klarvaken.app`).
-   - Safari may unzip the first layer for you automatically. That is fine; just unzip whatever zip is left.
-9. Drag **Klarvaken** into the **Applications** folder in the Finder sidebar.
-10. Continue with [Opening the app for the first time](#opening-the-app-for-the-first-time). Because this copy came from the internet, macOS will ask you to confirm it the first time.
+1. Click **[Download Klarvaken.app.zip](https://github.com/UncleDoomVSSP/Klarvaken/releases/latest/download/Klarvaken.app.zip)**. Your browser saves `Klarvaken.app.zip` to your **Downloads** folder.
+2. Open **Finder** and go to **Downloads**.
+3. Double-click `Klarvaken.app.zip` to unzip it. You get **Klarvaken** with an app icon (`Klarvaken.app`). Safari may have unzipped it for you already.
+4. Drag **Klarvaken** into the **Applications** folder in the Finder sidebar.
+5. Continue with [Opening the app for the first time](#opening-the-app-for-the-first-time). Because this copy came from the internet, macOS will ask you to confirm it the first time.
 
-Note: GitHub deletes Actions downloads after 90 days. If the **Artifacts** section is empty or expired, click **Re-run all jobs** on the run page (you need write access to the repository), or use install option B.
+Older versions are listed on the [Releases](https://github.com/UncleDoomVSSP/Klarvaken/releases) page.
+
+### Development builds
+
+Every push to this repository also builds the app with GitHub Actions. These builds are for testing changes that have not been released yet, and you need to be signed in to GitHub to download them.
+
+1. Open the **Actions** tab, click the **Build** workflow, then click the run you want.
+2. Scroll down to the **Artifacts** section and click **Klarvaken.app**.
+3. Unzip the download. GitHub wraps the build in its own zip, so you may need to unzip twice before you see `Klarvaken.app`.
+
+GitHub deletes these downloads after 90 days.
 
 ## Install option B: build the app yourself on your Mac
 
@@ -301,4 +313,29 @@ While on, Klarvaken holds an IOKit power assertion of type `PreventUserIdleDispl
 | `Sources/Klarvaken/main.swift` | The whole app: menu bar icon, menu, timers and power assertion. |
 | `Resources/Info.plist` | App metadata: name, bundle identifier (`space.vintersol.klarvaken`), version, minimum macOS version, and `LSUIElement` which hides the Dock icon. |
 | `build.sh` | Builds, signs and zips `Klarvaken.app` into the `build` folder. |
-| `.github/workflows/build.yml` | GitHub Actions workflow that runs `build.sh` on a Mac for every push and uploads the app as a download. |
+| `.github/workflows/build.yml` | GitHub Actions workflow that runs `build.sh` on a Mac for every push and uploads the app as a development build. |
+| `.github/workflows/release.yml` | GitHub Actions workflow that builds the app when a version tag is pushed and attaches `Klarvaken.app.zip` to a GitHub Release. |
+| `LICENSE` | MIT licence. |
+
+## Releasing a new version
+
+Releases are built by GitHub Actions from a version tag, so the download link at the top of this page always points at the latest one.
+
+1. Merge the changes into `main`.
+2. Tag the commit with the new version number, prefixed with `v`, and push the tag:
+
+   ```sh
+   git checkout main
+   git pull
+   git tag v1.2.0
+   git push origin v1.2.0
+   ```
+
+3. The **Release** workflow builds the app, sets the version in `Info.plist` from the tag, and creates a GitHub Release with `Klarvaken.app.zip` attached and auto-generated notes.
+4. Check the release on the [Releases](https://github.com/UncleDoomVSSP/Klarvaken/releases) page. Edit the notes there if you want.
+
+To remove a bad release, delete it on the Releases page and delete the tag with `git push origin --delete v1.2.0`.
+
+## Licence
+
+Klarvaken is released under the [MIT licence](LICENSE). Copyright (c) 2026 Vintersol Ltd.
