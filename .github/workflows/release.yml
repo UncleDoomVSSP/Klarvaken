@@ -25,10 +25,17 @@ jobs:
       - name: Build app
         run: ./build.sh
 
-      - name: Create release
+      # The release may already exist if it was created on the GitHub website
+      # (which also creates the tag). In that case attach the zip to it;
+      # otherwise create the release.
+      - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" build/Klarvaken.app.zip \
-            --title "Klarvaken $GITHUB_REF_NAME" \
-            --generate-notes
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" build/Klarvaken.app.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" build/Klarvaken.app.zip \
+              --title "Klarvaken $GITHUB_REF_NAME" \
+              --generate-notes
+          fi
