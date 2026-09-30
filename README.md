@@ -2,7 +2,7 @@
 
 Klarvaken is Swedish for wide awake.
 
-Klarvaken is a small macOS menu bar app that stops your Mac from going to sleep. It sits in the menu bar at the top right of the screen as a coffee cup icon. It has no Dock icon and no window.
+Klarvaken is a small macOS menu bar app that stops your Mac from going to sleep. It sits in the menu bar at the top right of the screen as an eye icon. It has no Dock icon and no window.
 
 - One click on the icon keeps the Mac awake until you click it again.
 - A right click opens a menu where you can keep the Mac awake for 30 minutes, 1 hour, 2 hours, 3 hours, 4 hours or indefinitely.
@@ -74,8 +74,8 @@ Either clone the repository with git:
 
 ```sh
 cd ~/Downloads
-git clone https://github.com/UncleDoomVSSP/klarvaken.git
-cd klarvaken
+git clone https://github.com/UncleDoomVSSP/Klarvaken.git
+cd Klarvaken
 ```
 
 Or download it as a zip:
@@ -85,12 +85,12 @@ Or download it as a zip:
 3. In Terminal, go into the unzipped folder, for example:
 
    ```sh
-   cd ~/Downloads/klarvaken-main
+   cd ~/Downloads/Klarvaken-main
    ```
 
 ### Step 3: build the app
 
-From inside the `klarvaken` folder, run:
+From inside the `Klarvaken` folder, run:
 
 ```sh
 ./build.sh
@@ -121,7 +121,7 @@ Copy the app into **Applications**:
 cp -R "build/Klarvaken.app" /Applications/
 ```
 
-Or, in Finder, open the `build` folder inside `klarvaken` and drag **Klarvaken** into **Applications**.
+Or, in Finder, open the `build` folder inside `Klarvaken` and drag **Klarvaken** into **Applications**.
 
 Then open it:
 
@@ -160,7 +160,7 @@ This removes the "downloaded from the internet" flag so macOS stops asking:
 xattr -dr com.apple.quarantine "/Applications/Klarvaken.app"
 ```
 
-Once the app is running, a coffee cup outline appears in the menu bar at the top right of the screen.
+Once the app is running, an eye outline appears in the menu bar at the top right of the screen.
 
 ## Using Klarvaken
 
@@ -168,8 +168,8 @@ Once the app is running, a coffee cup outline appears in the menu bar at the top
 
 | Icon | Meaning |
 | --- | --- |
-| Coffee cup outline | Off. The Mac sleeps as normal. |
-| Filled coffee cup | On. The Mac is being kept awake. |
+| Eye outline | Off. The Mac sleeps as normal. |
+| Filled eye | On. The Mac is being kept awake. |
 
 Hover over the icon to see a tooltip with the current state and, for a timed session, when it ends.
 

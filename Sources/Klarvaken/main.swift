@@ -218,7 +218,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func updateUI() {
         guard let button = statusItem?.button else { return }
-        let symbol = isActive ? "cup.and.saucer.fill" : "cup.and.saucer"
+        let symbol = isActive ? "eye.fill" : "eye"
         let image = NSImage(systemSymbolName: symbol, accessibilityDescription: isActive ? "Klarvaken is on" : "Klarvaken is off")
         image?.isTemplate = true
         button.image = image
