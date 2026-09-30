@@ -115,7 +115,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         menu.addItem(.separator())
 
-        let quitItem = NSMenuItem(title: "Quit Stay Awake", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        let quitItem = NSMenuItem(title: "Quit Klarvaken", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         menu.addItem(quitItem)
     }
 
@@ -151,7 +151,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 &assertionID
             )
             guard result == kIOReturnSuccess else {
-                NSLog("Stay Awake: failed to create power assertion (%d)", result)
+                NSLog("Klarvaken: failed to create power assertion (%d)", result)
                 return
             }
             isActive = true
@@ -219,21 +219,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func updateUI() {
         guard let button = statusItem?.button else { return }
         let symbol = isActive ? "cup.and.saucer.fill" : "cup.and.saucer"
-        let image = NSImage(systemSymbolName: symbol, accessibilityDescription: isActive ? "Stay Awake is on" : "Stay Awake is off")
+        let image = NSImage(systemSymbolName: symbol, accessibilityDescription: isActive ? "Klarvaken is on" : "Klarvaken is off")
         image?.isTemplate = true
         button.image = image
 
         if isActive {
             button.toolTip = "\(statusText()). Click to allow sleep, right-click for options."
         } else {
-            button.toolTip = "Stay Awake is off. Click to keep the Mac awake, right-click for options."
+            button.toolTip = "Klarvaken is off. Click to keep the Mac awake, right-click for options."
         }
         updateMenu()
     }
 
     private func statusText() -> String {
-        guard isActive else { return "Stay Awake is off" }
-        guard let endDate = endDate else { return "Stay Awake is on indefinitely" }
+        guard isActive else { return "Klarvaken is off" }
+        guard let endDate = endDate else { return "Klarvaken is on indefinitely" }
 
         let remaining = max(0, endDate.timeIntervalSinceNow)
         let formatter = DateFormatter()
