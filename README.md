@@ -74,8 +74,8 @@ Either clone the repository with git:
 
 ```sh
 cd ~/Downloads
-git clone https://github.com/UncleDoomVSSP/klarvaken.git
-cd klarvaken
+git clone https://github.com/UncleDoomVSSP/Klarvaken.git
+cd Klarvaken
 ```
 
 Or download it as a zip:
@@ -85,12 +85,12 @@ Or download it as a zip:
 3. In Terminal, go into the unzipped folder, for example:
 
    ```sh
-   cd ~/Downloads/klarvaken-main
+   cd ~/Downloads/Klarvaken-main
    ```
 
 ### Step 3: build the app
 
-From inside the `klarvaken` folder, run:
+From inside the `Klarvaken` folder, run:
 
 ```sh
 ./build.sh
@@ -121,7 +121,7 @@ Copy the app into **Applications**:
 cp -R "build/Klarvaken.app" /Applications/
 ```
 
-Or, in Finder, open the `build` folder inside `klarvaken` and drag **Klarvaken** into **Applications**.
+Or, in Finder, open the `build` folder inside `Klarvaken` and drag **Klarvaken** into **Applications**.
 
 Then open it:
 
