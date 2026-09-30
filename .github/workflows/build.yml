@@ -15,5 +15,5 @@ jobs:
       - name: Upload app
         uses: actions/upload-artifact@v7
         with:
-          name: Stay_Awake.app
-          path: build/Stay_Awake.app.zip
+          name: Klarvaken.app
+          path: build/Klarvaken.app.zip

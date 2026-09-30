@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleName</key>
-    <string>Stay Awake</string>
+    <string>Klarvaken</string>
     <key>CFBundleDisplayName</key>
-    <string>Stay Awake</string>
+    <string>Klarvaken</string>
     <key>CFBundleIdentifier</key>
-    <string>co.surveil.stayawake</string>
+    <string>space.vintersol.klarvaken</string>
     <key>CFBundleExecutable</key>
-    <string>StayAwake</string>
+    <string>Klarvaken</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
